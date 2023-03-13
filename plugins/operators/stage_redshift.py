@@ -4,6 +4,25 @@ from airflow.utils.decorators import apply_defaults
 from airflow.secrets.metastore import MetastoreBackend
 
 class StageToRedshiftOperator(BaseOperator):
+    """
+    This operator copies data from S3 to a staging table in a Redshift database.
+
+    :param redshift_conn_id: The connection ID to use for connecting to the Redshift database.
+    :type redshift_conn_id: str
+    :param aws_credentials_id: The connection ID to use for accessing AWS credentials.
+    :type aws_credentials_id: str
+    :param table: The name of the staging table in the Redshift database.
+    :type table: str
+    :param s3_bucket: The name of the S3 bucket where the data is stored.
+    :type s3_bucket: str
+    :param s3_key: The key of the file in S3 containing the data to be copied.
+    :type s3_key: str
+    :param ignore_headers: The number of header rows to ignore when copying data from S3. Default value is 1.
+    :type ignore_headers: int
+    :param json_path_option: The JSON path option used when copying JSON data from S3. Default value is 'auto'.
+    :type json_path_option: str
+    """
+    
     ui_color = '#358140'
     template_fields = ("s3_key",)
     copy_sql = """

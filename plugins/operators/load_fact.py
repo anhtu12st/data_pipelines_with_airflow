@@ -13,6 +13,7 @@ class LoadFactOperator(BaseOperator):
     :param sql: The SQL statement used to insert data into the fact table.
     :type sql: str
     """
+    
     ui_color = '#F98866'
 
     @apply_defaults
